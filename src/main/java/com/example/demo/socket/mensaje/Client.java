@@ -23,7 +23,7 @@ public class Client {
 			PrintWriter salida = new PrintWriter(clientSocket.getOutputStream(),true);
 		
 			
-			salida.println("Vip");
+			salida.println("Platinium");
 			
 			String precio = entrada.readLine();
 			System.out.println("El precio es => " + precio);
