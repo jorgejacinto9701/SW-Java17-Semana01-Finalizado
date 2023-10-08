@@ -16,25 +16,26 @@ public class Server {
 		try {
 			Socket clientSocket;
 			
-			ServerSocket serverSocket = new ServerSocket(PORT);
-			while(true) {
-				System.out.println("------------- 1 Iniciando ServerSocket ---------------");
-				System.out.println("------------- 2 A la espera de  clientSocket ---------");
-				clientSocket = serverSocket.accept();
-				System.out.println("------------- 3 Llegada de un clientSocket -----------");
-				
-				File fileDestino = new File("D:/server/Java-Jacinto-2.png");
-				FileOutputStream fos = new FileOutputStream(fileDestino);
-				DataInputStream entrada = new DataInputStream(clientSocket.getInputStream());
-				
-				int byteLeidos;
-				while ( (byteLeidos = entrada.read())!= -1) {
-					fos.write(byteLeidos);
+			try (ServerSocket serverSocket = new ServerSocket(PORT)) {
+				while(true) {
+					System.out.println("------------- 1 Iniciando ServerSocket ---------------");
+					System.out.println("------------- 2 A la espera de  clientSocket ---------");
+					clientSocket = serverSocket.accept();
+					System.out.println("------------- 3 Llegada de un clientSocket -----------");
+					
+					File fileDestino = new File("D:/server/Java-Jacinto-2.png");
+					FileOutputStream fos = new FileOutputStream(fileDestino);
+					DataInputStream entrada = new DataInputStream(clientSocket.getInputStream());
+					
+					int byteLeidos;
+					while ( (byteLeidos = entrada.read())!= -1) {
+						fos.write(byteLeidos);
+					}
+					fos.close();
+					
+					clientSocket.close();
+					System.out.println("------------- 4 Finaliza atención al clientSocket ----");
 				}
-				fos.close();
-				
-				clientSocket.close();
-				System.out.println("------------- 4 Finaliza atención al clientSocket ----");
 			}
 			
 			

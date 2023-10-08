@@ -13,17 +13,18 @@ public class Server {
 		try {
 			Socket clientSocket;
 			
-			ServerSocket serverSocket = new ServerSocket(PORT);
-			while(true) {
-				System.out.println("------------- 1 Iniciando ServerSocket ---------------");
-				System.out.println("------------- 2 A la espera de  clientSocket ---------");
-				clientSocket = serverSocket.accept();
-				System.out.println("------------- 3 Llegada de un clientSocket -----------");
-				
-				
-				
-				clientSocket.close();
-				System.out.println("------------- 4 Finaliza atención al clientSocket ----");
+			try (ServerSocket serverSocket = new ServerSocket(PORT)) {
+				while(true) {
+					System.out.println("------------- 1 Iniciando ServerSocket ---------------");
+					System.out.println("------------- 2 A la espera de  clientSocket ---------");
+					clientSocket = serverSocket.accept();
+					System.out.println("------------- 3 Llegada de un clientSocket -----------");
+					
+					
+					
+					clientSocket.close();
+					System.out.println("------------- 4 Finaliza atención al clientSocket ----");
+				}
 			}
 			
 			
